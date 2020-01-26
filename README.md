@@ -44,7 +44,7 @@ dyn.listFiles(function(err, data) {
 let changes = [
     // See API documentation for formatting:
     // https://apidocs.dynalist.io/#make-change-to-the-content-of-a-document
-]
+];
 
 dyn.editFile(changes, function(err, data) {
     // …
@@ -175,3 +175,4 @@ This client is not done yet.
 - Testing
 - License
 - Expand examples in readme
+- Create usable example scripts
