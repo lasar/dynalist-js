@@ -1,0 +1,26 @@
+{
+  "name": "dynalist",
+  "version": "1.0.0",
+  "description": "A Node.JS Client for dynalist.io",
+  "main": "dynalist.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lasar/dynalist.js.git"
+  },
+  "keywords": [
+    "dynalist",
+    "client"
+  ],
+  "author": "Lasar Liepins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lasar/dynalist.js/issues"
+  },
+  "homepage": "https://github.com/lasar/dynalist.js#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
