@@ -54,9 +54,13 @@ Dynalist.prototype.sendToInbox = function (content, options, callback) {
     this.makeRequest('inbox/add', options, callback);
 };
 
-// Dynalist.prototype.upload = function (filename, content_type, data, callback) {
-//     // TODO: Implement
-// };
+Dynalist.prototype.upload = function (filename, content_type, data, callback) {
+    this.makeRequest('doc/edit', {
+        filename: filename,
+        content_type: content_type,
+        data: data
+    }, callback);
+};
 
 // Internal
 
