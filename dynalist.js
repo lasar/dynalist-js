@@ -17,9 +17,11 @@ Dynalist.prototype.listFiles = function (callback) {
     this.makeRequest('file/list', {}, callback);
 };
 
-// Dynalist.prototype.editFile = function (changes, callback) {
-//     // TODO: Implement
-// };
+Dynalist.prototype.editFile = function (changes, callback) {
+    this.makeRequest('file/edit', {
+        changes: changes
+    }, callback);
+};
 
 Dynalist.prototype.readDocument = function (file_id, callback) {
     this.makeRequest('doc/read', {
@@ -27,9 +29,11 @@ Dynalist.prototype.readDocument = function (file_id, callback) {
     }, callback);
 };
 
-// Dynalist.prototype.checkForDocumentUpdates = function (file_ids, callback) {
-//     // TODO: Implement
-// };
+Dynalist.prototype.checkForDocumentUpdates = function (file_ids, callback) {
+    this.makeRequest('doc/check_for_updates', {
+        file_ids: file_ids
+    }, callback);
+};
 
 Dynalist.prototype.editDocument = function (file_id, changes, callback) {
     this.makeRequest('doc/edit', {
