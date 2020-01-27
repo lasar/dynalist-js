@@ -1,16 +1,20 @@
 # dynalist.js - a Node.JS Client for dynalist.io
 
+A thin client for accessing the Dynalist API.
+
+[Dynalist home page](https://dynalist.io).
+
 Based on the [official API documentation](https://apidocs.dynalist.io/).
 
-## Callbacks
+## General
+
+### Callbacks
 
 All callback functions are called with `err` and `data` parameters.
 
 `err` is either `null` or an object with the attributes `_code` and `_msg` as described [in the API documentation](https://apidocs.dynalist.io/#common-error-reference).
 
 `data` is an object representing the JSON response without modifications.
-
-## API methods
 
 ### Create Dynalist client instance
 
@@ -28,6 +32,8 @@ The API token can also be set/changed afterwards:
 dyn.setToken('<my developer api token>');
 ```
 
+## API methods
+
 ### listFiles - Get all documents and folders
 
 ```js
@@ -36,14 +42,15 @@ dyn.listFiles(function(err, data) {
 });
 ```
 
+You can use `dyn.buildNodeTree(data.files)` to create a hierarchical tree of folders and files.
+
 ### editFile - Make changes to documents and folders
 
 **NOTE**: This method has not been implemented yet.
 
 ```js
 let changes = [
-    // See API documentation for formatting:
-    // https://apidocs.dynalist.io/#make-change-to-the-content-of-a-document
+    // …
 ];
 
 dyn.editFile(changes, function(err, data) {
@@ -60,6 +67,8 @@ dyn.readDocument(file_id, function(err, data) {
     // …
 });
 ```
+
+You can use `dyn.buildNodeTree(data.nodes)` to create a hierarchical tree of the content.
 
 ### checkForDocumentUpdates - Check if documents has been updated
 
@@ -86,6 +95,8 @@ dyn.editDocument(file_id, changes, function(err, data) {
     // …
 });
 ```
+
+See [API documentation](https://apidocs.dynalist.io/#make-change-to-the-content-of-a-document) for formatting `changes`.
 
 ### sendToInbox - Send to inbox
 
