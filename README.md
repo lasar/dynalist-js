@@ -180,10 +180,10 @@ dyn.readDocument(documentId, function(err, doc) {
 
 This client is not done yet.
 
-- Implement: `editFile` 
-- Implement: `checkForDocumentUpdates` 
-- Implement: `upload` 
-- Testing
+- Test: `editFile` 
+- Test: `checkForDocumentUpdates` 
+- Test: `upload` 
+- Add unit tests
 - License
 - Expand examples in readme
 - Create usable example scripts
