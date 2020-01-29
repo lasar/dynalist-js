@@ -18,48 +18,58 @@ Dynalist.prototype.listFiles = function (callback) {
 };
 
 Dynalist.prototype.editFile = function (changes, callback) {
-    this.makeRequest('file/edit', {
+    const data = {
         changes: changes
-    }, callback);
+    };
+
+    this.makeRequest('file/edit', data, callback);
 };
 
 Dynalist.prototype.readDocument = function (file_id, callback) {
-    this.makeRequest('doc/read', {
+    const data = {
         file_id: file_id
-    }, callback);
+    };
+
+    this.makeRequest('doc/read', data, callback);
 };
 
 Dynalist.prototype.checkForDocumentUpdates = function (file_ids, callback) {
-    this.makeRequest('doc/check_for_updates', {
+    const data = {
         file_ids: file_ids
-    }, callback);
+    };
+
+    this.makeRequest('doc/check_for_updates', data, callback);
 };
 
 Dynalist.prototype.editDocument = function (file_id, changes, callback) {
-    this.makeRequest('doc/edit', {
+    const data = {
         file_id: file_id,
         changes: changes
-    }, callback);
+    };
+
+    this.makeRequest('doc/edit', data, callback);
 };
 
-Dynalist.prototype.sendToInbox = function (content, options, callback) {
-    if (typeof options === 'function') {
-        callback = options;
+Dynalist.prototype.sendToInbox = function (content, data, callback) {
+    if (typeof data === 'function') {
+        callback = data;
 
-        options = {};
+        data = {};
     }
 
-    options.content = content;
+    data.content = content;
 
-    this.makeRequest('inbox/add', options, callback);
+    this.makeRequest('inbox/add', data, callback);
 };
 
-Dynalist.prototype.upload = function (filename, content_type, data, callback) {
-    this.makeRequest('doc/edit', {
+Dynalist.prototype.upload = function (filename, content_type, file_data, callback) {
+    const data = {
         filename: filename,
         content_type: content_type,
-        data: data
-    }, callback);
+        data: file_data
+    };
+
+    this.makeRequest('doc/edit', data, callback);
 };
 
 // Internal
@@ -67,14 +77,16 @@ Dynalist.prototype.upload = function (filename, content_type, data, callback) {
 Dynalist.prototype.makeRequest = function (endpoint, data, callback) {
     data.token = this.token;
 
-    request({
+    const options = {
         url: this.apiBaseUrl + endpoint,
         method: 'POST',
         headers: {
             'content-type': 'application/json',
         },
         json: data
-    }, function (err, res, response) {
+    };
+
+    request(options, function (err, res, response) {
         if (err) {
             // Error in HTTP request - return object that is formatted like a Dynalist error
             return callback({
@@ -109,15 +121,19 @@ Dynalist.prototype.buildNodeMap = function (nodes) {
     let nodeMap = {},
         i;
 
-    for (i in nodes) {
-        nodeMap[nodes[i].id] = nodes[i];
-    }
+    Object.keys(nodes).forEach(function(key) {
+        var node = nodes[key];
 
-    for (i in nodes) {
-        for (k in nodes[i].children) {
-            nodeMap[nodes[i].children[k]].parent = nodes[i].id;
+        nodeMap[node.id] = node;
+    });
+
+    Object.keys(nodes).forEach(function(key) {
+        var node = nodes[key];
+
+        for (k in node.children) {
+            nodeMap[node.children[k]].parent = node.id;
         }
-    }
+    });
 
     return nodeMap;
 };

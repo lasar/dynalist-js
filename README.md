@@ -2,15 +2,15 @@
 
 A thin client for accessing the Dynalist API.
 
-[Dynalist home page](https://dynalist.io).
-
-Based on the [official API documentation](https://apidocs.dynalist.io/).
+- [Dynalist home page](https://dynalist.io)
+- [Official API documentation](https://apidocs.dynalist.io/)
+- [Dynalist Developer page](https://dynalist.io/developer) for generating a Secret Token to access the API
 
 ## General
 
 ### Callbacks
 
-All callback functions are called with `err` and `data` parameters.
+Callback functions are always called with `err` and `data` parameters.
 
 `err` is either `null` or an object with the attributes `_code` and `_msg` as described [in the API documentation](https://apidocs.dynalist.io/#common-error-reference).
 
@@ -18,7 +18,7 @@ All callback functions are called with `err` and `data` parameters.
 
 ### Create Dynalist client instance
 
-Require the module, then create an instance with the api token.
+Require the module, then create an instance with the API Secret Token.
 
 ```js
 const Dynalist = require('dynalist');
@@ -101,7 +101,7 @@ See [API documentation](https://apidocs.dynalist.io/#make-change-to-the-content-
 ### sendToInbox - Send to inbox
 
 ```js
-let content = 'Call Dave';
+let content = 'Call Dana';
 
 let options = {
     index: -1,
@@ -114,10 +114,10 @@ dyn.sendToInbox(content, options, function(err, data) {
 });
 ```
 
-`options` is optional and can be omitted:
+`options` can be omitted when not needed:
 
 ```js
-dyn.sendToInbox('Call Anna', function(err, data) {
+dyn.sendToInbox('Call Fox', function(err, data) {
     // …
 });
 ```
@@ -142,12 +142,12 @@ Some helpers to massage data. They work only on local data.
 let file_id = 'fe7a87a626f241b18ef30661';
 
 let link_to_document = dyn.buildUrl(file_id);
-// => https://dynalist.io/d/UQX32RxuAERPfVQtNJpGHgxT
+// => https://dynalist.io/d/fe7a87a626f241b18ef30661
 
 let node_id = '7be6403186fb8a7ed11931ed';
 
 let link_to_node = dyn.buildUrl(file_id, node_id);
-// => https://dynalist.io/d/UQX32RxuAERPfVQtNJpGHgxT#z=EJKenCUBeLhoPp3PoRGnBm9i
+// => https://dynalist.io/d/fe7a87a626f241b18ef30661#z=7be6403186fb8a7ed11931ed
 ```
 
 ### buildNodeMap - Generate a hash map of nodes
@@ -160,7 +160,8 @@ This method converts that array into an object with each node's id as the key.
 dyn.readDocument('my document id', function(err, doc) {
     const nodeMap = dyn.buildNodeMap(doc.nodes);
     
-    console.log(nodeMap['jQvLeBjvZ35WAs_HxdtI1RWK']);
+    // Now the nodes can be accessed by using their ID as the key:
+    console.log(nodeMap['7be6403186fb8a7ed11931ed']);
 });
 ```
 
