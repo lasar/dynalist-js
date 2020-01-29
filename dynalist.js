@@ -118,17 +118,18 @@ Dynalist.prototype.buildUrl = function (file_id, node_id) {
 };
 
 Dynalist.prototype.buildNodeMap = function (nodes) {
-    let nodeMap = {},
-        i;
+    let nodeMap = {};
 
     Object.keys(nodes).forEach(function(key) {
-        var node = nodes[key];
+        const node = nodes[key];
 
         nodeMap[node.id] = node;
     });
 
     Object.keys(nodes).forEach(function(key) {
-        var node = nodes[key];
+        const node = nodes[key];
+
+        let k;
 
         for (k in node.children) {
             nodeMap[node.children[k]].parent = node.id;
@@ -139,8 +140,7 @@ Dynalist.prototype.buildNodeMap = function (nodes) {
 };
 
 Dynalist.prototype.buildNodeTree = function (nodes) {
-    let nodeMap = this.buildNodeMap(nodes),
-        tree = recurse('root');
+    let nodeMap = this.buildNodeMap(nodes);
 
     function recurse(id) {
         let node = nodeMap[id],
@@ -158,7 +158,7 @@ Dynalist.prototype.buildNodeTree = function (nodes) {
         return node;
     }
 
-    return tree;
+    return recurse('root');
 };
 
 module.exports = Dynalist;
