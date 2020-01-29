@@ -127,7 +127,7 @@ dyn.sendToInbox('Call Fox', function(err, data) {
 **NOTE**: This method has not been implemented yet.
 
 ```js
-dyn.upload(filename, content_type, data, callback) {
+dyn.upload(filename, content_type, data, function(err, data) {
     // …
 });
 ```
