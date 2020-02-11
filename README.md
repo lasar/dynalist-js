@@ -1,5 +1,7 @@
 # dynalist.js - a Node.JS Client for dynalist.io
 
+![CI](https://github.com/lasar/dynalist-js/workflows/Node.js%20CI/badge.svg) ![Package Build](https://github.com/lasar/dynalist-js/workflows/Node.js%20Package/badge.svg)
+
 A thin client for accessing the Dynalist API.
 
 The code is functional and probably fine, but is not yet properly tested. Proceed at your own risk.
