@@ -2,6 +2,8 @@
 
 A thin client for accessing the Dynalist API.
 
+The code is functional and probably fine, but is not yet properly tested. Proceed at your own risk.∆
+
 - [Dynalist home page](https://dynalist.io)
 - [Official API documentation](https://apidocs.dynalist.io/)
 - [Dynalist Developer page](https://dynalist.io/developer) for generating a Secret Token to access the API
