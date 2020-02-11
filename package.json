@@ -1,6 +1,6 @@
 {
   "name": "dynalist-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Node.JS Client for dynalist.io",
   "main": "dynalist.js",
   "scripts": {
