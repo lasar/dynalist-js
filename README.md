@@ -185,6 +185,7 @@ dyn.readDocument(documentId, function(err, doc) {
 
 This client is not done yet.
 
+- Add async/await based examples
 - Test: `editFile` 
 - Test: `checkForDocumentUpdates` 
 - Test: `upload` 
