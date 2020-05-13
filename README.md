@@ -1,33 +1,23 @@
-# dynalist.js - a Node.JS Client for dynalist.io
+# client.js - a Node.JS Client for dynalist.io
 
 ![CI](https://github.com/lasar/dynalist-js/workflows/Node.js%20CI/badge.svg) ![Package Build](https://github.com/lasar/dynalist-js/workflows/Node.js%20Package/badge.svg)
 
-A thin client for accessing the Dynalist API.
-
-The code is functional and probably fine, but is not yet properly tested. Proceed at your own risk.
+A thin client for accessing the Client API.
 
 - [Dynalist home page](https://dynalist.io)
 - [Official API documentation](https://apidocs.dynalist.io/)
-- [Dynalist Developer page](https://dynalist.io/developer) for generating a Secret Token to access the API
+- [Client Developer page](https://dynalist.io/developer) for generating a Secret Token to access the API
 
-## General
-
-### Callbacks
-
-Callback functions are always called with `err` and `data` parameters.
-
-`err` is either `null` or an object with the attributes `_code` and `_msg` as described [in the API documentation](https://apidocs.dynalist.io/#common-error-reference).
-
-`data` is an object representing the JSON response without modifications.
+## API client usage
 
 ### Create Dynalist client instance
 
 Require the module, then create an instance with the API Secret Token.
 
 ```js
-const Dynalist = require('dynalist');
+const Client = require('dynalist-js');
 
-const dyn = new Dynalist('<my developer api token>');
+const dyn = new Client('<my developer api token>');
 ```
     
 The API token can also be set/changed afterwards:
@@ -36,11 +26,41 @@ The API token can also be set/changed afterwards:
 dyn.setToken('<my developer api token>');
 ```
 
+### Promises
+
+All API methods return a promise object that can be used with `.then` or async/await.
+
+### Callbacks
+
+All API methods can be called with a callback function as the last parameter.
+
+Callback functions are always called with `err` and `data` parameters.
+
+`err` is either `null` or an object with the attributes `_code` and `_msg` as described [in the API documentation](https://apidocs.dynalist.io/#common-error-reference).
+
+`data` is an object representing the JSON response without modifications.
+
 ## API methods
 
 ### listFiles - Get all documents and folders
 
 ```js
+// Using promise interface
+
+dyn.listFiles()
+    .then(response => console.log)
+    .catch(error => console.log);
+
+// Using async/await
+
+async function getMyFiles() {
+    const data = await dyn.listFiles();
+
+    // …
+}
+
+// With callback
+
 dyn.listFiles(function(err, data) {
     // …
 });
@@ -49,8 +69,6 @@ dyn.listFiles(function(err, data) {
 You can use `dyn.buildNodeTree(data.files)` to create a hierarchical tree of folders and files.
 
 ### editFile - Make changes to documents and folders
-
-**NOTE**: This method has not been implemented yet.
 
 ```js
 let changes = [
@@ -75,8 +93,6 @@ dyn.readDocument(file_id, function(err, data) {
 You can use `dyn.buildNodeTree(data.nodes)` to create a hierarchical tree of the content.
 
 ### checkForDocumentUpdates - Check if documents has been updated
-
-**NOTE**: This method has not been implemented yet.
 
 ```js
 let file_ids = ['…'];
@@ -128,33 +144,33 @@ dyn.sendToInbox('Call Fox', function(err, data) {
     
 ### upload - Upload file (Pro only)
 
-**NOTE**: This method has not been implemented yet.
-
 ```js
 dyn.upload(filename, content_type, data, function(err, data) {
     // …
 });
 ```
 
+This API endpoint is only available for Pro accounts.
+
 ## Utilities
 
 Some helpers to massage data. They work only on local data.
 
-### buildUrl - Generate URL to document/node
+### util.buildUrl - Generate URL to document/node
 
 ```js
 let file_id = 'fe7a87a626f241b18ef30661';
 
-let link_to_document = dyn.buildUrl(file_id);
+let link_to_document = dyn.util.buildUrl(file_id);
 // => https://dynalist.io/d/fe7a87a626f241b18ef30661
 
 let node_id = '7be6403186fb8a7ed11931ed';
 
-let link_to_node = dyn.buildUrl(file_id, node_id);
+let link_to_node = dyn.util.buildUrl(file_id, node_id);
 // => https://dynalist.io/d/fe7a87a626f241b18ef30661#z=7be6403186fb8a7ed11931ed
 ```
 
-### buildNodeMap - Generate a hash map of nodes
+### util.buildNodeMap - Generate a hash map of nodes
 
 The document tree and the node tree inside a file are returned from the API as a flat array.
 
@@ -162,20 +178,20 @@ This method converts that array into an object with each node's id as the key.
 
 ```js
 dyn.readDocument('my document id', function(err, doc) {
-    const nodeMap = dyn.buildNodeMap(doc.nodes);
+    const nodeMap = dyn.util.buildNodeMap(doc.nodes);
     
     // Now the nodes can be accessed by using their ID as the key:
     console.log(nodeMap['7be6403186fb8a7ed11931ed']);
 });
 ```
 
-### buildNodeTree - Generate a tree of nodes
+### util.buildNodeTree - Generate a tree of nodes
 
 Converts a flat array of nodes into a tree based on `children` associations. 
 
 ```js
 dyn.readDocument(documentId, function(err, doc) {
-    const tree = dyn.buildNodeTree(doc.nodes);
+    const tree = dyn.util.buildNodeTree(doc.nodes);
 
     console.log(JSON.stringify(tree, 0, 4));
 });
@@ -183,13 +199,11 @@ dyn.readDocument(documentId, function(err, doc) {
 
 ## To Do
 
-This client is not done yet.
+- Proper tests need to be built.
+- Some working example scripts would be very nice.
 
-- Add async/await based examples
+---
+
 - Test: `editFile` 
 - Test: `checkForDocumentUpdates` 
 - Test: `upload` 
-- Add unit tests
-- License
-- Expand examples in readme
-- Create usable example scripts

@@ -2,7 +2,7 @@
   "name": "dynalist-js",
   "version": "0.0.3",
   "description": "A Node.JS Client for dynalist.io",
-  "main": "dynalist.js",
+  "main": "src/client.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
