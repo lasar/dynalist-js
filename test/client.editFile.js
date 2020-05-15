@@ -19,10 +19,7 @@ describe('Client#editFile', function () {
             }
         ]);
 
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         response.should.have.key('results');
         response.results.should.be.an.Array();
@@ -49,7 +46,7 @@ async function getOriginalTitle() {
     const response = await dyn.listFiles();
 
     for (let i in response.files) {
-        if (response.files[i].id === env.fileId) {
+        if (response.files.hasOwnProperty(i) && response.files[i].id === env.fileId) {
             return response.files[i].title;
         }
     }

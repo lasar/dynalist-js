@@ -17,10 +17,7 @@ describe('Client#sendToInbox', function () {
             note: 'Created by test suite'
         });
 
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         response.should.have.key('file_id');
 
@@ -44,7 +41,6 @@ describe('Client#sendToInbox', function () {
             }
         ]);
 
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
     });
 });

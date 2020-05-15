@@ -28,10 +28,7 @@ describe('Client#editDocument', function () {
 
         const response = await dyn.editDocument(env.fileId, changes);
 
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         response.should.have.key('new_node_ids');
         response.new_node_ids.should.be.an.Array();
@@ -58,10 +55,7 @@ describe('Client#editDocument', function () {
 
         const response = await dyn.editDocument(env.fileId, changes);
 
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         response.should.have.key('new_node_ids');
         response.new_node_ids.should.be.an.Array();
@@ -85,10 +79,7 @@ describe('Client#editDocument', function () {
 
         const response = await dyn.editDocument(env.fileId, changes);
 
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         response.should.have.key('new_node_ids');
         response.new_node_ids.should.be.an.Array();
@@ -115,10 +106,7 @@ describe('Client#editDocument', function () {
 
         const response = await dyn.editDocument(env.fileId, changes);
 
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         response.should.have.key('new_node_ids');
         response.new_node_ids.should.be.an.Array();

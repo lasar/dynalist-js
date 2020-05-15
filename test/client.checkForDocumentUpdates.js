@@ -10,10 +10,7 @@ describe('Client#checkForDocumentUpdates', function () {
 
         const response = await dyn.checkForDocumentUpdates([env.fileId]);
 
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         response.should.have.key('versions');
         response.versions.should.be.an.Object();

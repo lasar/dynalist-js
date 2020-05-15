@@ -78,8 +78,7 @@ describe('Util#buildNodeTree', function () {
 
         const response = await dyn.readDocument(env.fileId);
 
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         // Do the actual testing
 
@@ -134,7 +133,6 @@ describe('Util#buildNodeTree', function () {
             }
         ]);
 
-        del.should.have.key('_code');
-        del._code.should.be.exactly('Ok');
+        env.verifySuccess(del);
     });
 });

@@ -35,10 +35,7 @@ describe('Client#listFiles', function () {
     });
 
     function verifyResponse(response) {
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
+        env.verifySuccess(response);
 
         response.should.have.key('files');
         response.files.should.be.an.Array();
