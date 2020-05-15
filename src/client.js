@@ -66,16 +66,6 @@ Client.prototype.sendToInbox = function (content, data, callback) {
     return this.makeRequest('inbox/add', data, callback);
 };
 
-Client.prototype.upload = function (filename, content_type, file_data, callback) {
-    const data = {
-        filename: filename,
-        content_type: content_type,
-        data: file_data
-    };
-
-    return this.makeRequest('doc/edit', data, callback);
-};
-
 // Internal
 
 Client.prototype.makeRequest = function (endpoint, data, callback) {
