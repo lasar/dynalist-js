@@ -10,7 +10,7 @@ A thin client for accessing the Client API.
 
 ## Installation
 
-```js
+```bash
 # NPM:
 npm install dynalist-js
 
