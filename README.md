@@ -8,6 +8,16 @@ A thin client for accessing the Client API.
 - [Official API documentation](https://apidocs.dynalist.io/)
 - [Client Developer page](https://dynalist.io/developer) for generating a Secret Token to access the API
 
+## Installation
+
+```js
+# NPM:
+npm install dynalist-js
+
+# Yarn:
+yarn add dynalist-js
+```
+
 ## API client usage
 
 ### Create Dynalist client instance
