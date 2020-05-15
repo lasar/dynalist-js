@@ -4,7 +4,7 @@
   "description": "A Node.JS Client for dynalist.io",
   "main": "src/client.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --file test/client.constructor.js"
   },
   "repository": {
     "type": "git",
