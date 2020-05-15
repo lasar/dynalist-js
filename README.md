@@ -197,13 +197,18 @@ dyn.readDocument(documentId, function(err, doc) {
 });
 ```
 
-## To Do
+## Test
 
-- Proper tests need to be built.
-- Some working example scripts would be very nice.
+Tests are rudimentary at best.
 
----
+The tests require a working API token and the ID of a file that can be used by the tests. The file will be modified, therefore it should not contain actually important information.
 
-- Test: `editFile` 
-- Test: `checkForDocumentUpdates` 
-- Test: `upload` 
+There is no option to run tests only offline yet.
+
+```bash
+# Install dependencies
+npm install
+
+# Run test, passing in API token and file ID as environment variables
+API_TOKEN=my_api_token FILE_ID=my_test_file npm test
+```
