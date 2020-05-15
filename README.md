@@ -193,11 +193,12 @@ dyn.readDocument(documentId, function(err, doc) {
 
 ## Test
 
-Tests are rudimentary at best.
+Rudimentary tests exist but could be extended by a lot. They are written with `mocha` and `should`.
 
 The tests require a working API token and the ID of a file that can be used by the tests. The file will be modified, therefore it should not contain actually important information.
+Also note that frequest test runs may run into the API's rate limiting.
 
-There is no option to run tests only offline yet.
+There is no option to run tests only offline yet. **Tests WILL modify data in your account.**
 
 ```bash
 # Install dependencies
@@ -205,4 +206,7 @@ npm install
 
 # Run test, passing in API token and file ID as environment variables
 API_TOKEN=my_api_token FILE_ID=my_test_file npm test
+
+# If you want to pass options to mocha you need to call mocha directly: 
+API_TOKEN=my_api_token FILE_ID=my_test_file ./node_modules/bin/mocha --grep "Client#listFiles" 
 ```
