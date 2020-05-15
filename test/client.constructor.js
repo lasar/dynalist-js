@@ -2,8 +2,6 @@ const should = require('should');
 
 const Client = require('../');
 
-// const env = require('./env');
-
 describe('Client()', function () {
     it('should return an instance', function () {
         const dyn = new Client('testToken');

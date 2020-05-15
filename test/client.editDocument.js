@@ -5,8 +5,6 @@ const Client = require('../');
 
 const env = require('./env');
 
-const sleepForHuman = false;
-
 describe('Client#editDocument', function () {
     let testNode, moveTargetNode;
 
@@ -42,7 +40,7 @@ describe('Client#editDocument', function () {
         moveTargetNode = response.new_node_ids[0];
         testNode = response.new_node_ids[1];
 
-        if (sleepForHuman) {
+        if (env.sleepForHuman) {
             await sleep(500);
         }
     });
@@ -69,7 +67,7 @@ describe('Client#editDocument', function () {
         response.new_node_ids.should.be.an.Array();
         response.new_node_ids.should.be.empty();
 
-        if (sleepForHuman) {
+        if (env.sleepForHuman) {
             await sleep(500);
         }
     });
@@ -96,7 +94,7 @@ describe('Client#editDocument', function () {
         response.new_node_ids.should.be.an.Array();
         response.new_node_ids.should.be.empty();
 
-        if (sleepForHuman) {
+        if (env.sleepForHuman) {
             await sleep(500);
         }
     });

@@ -9,4 +9,5 @@ if (typeof process.env.API_TOKEN === 'undefined' || typeof process.env.FILE_ID =
 module.exports = {
     apiToken: process.env.API_TOKEN,
     fileId: process.env.FILE_ID,
+    sleepForHuman: false
 };

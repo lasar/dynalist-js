@@ -4,19 +4,9 @@ const Client = require('../');
 
 const env = require('./env');
 
+// Using listFiles to verify that all interaction modes (callback, promise, async/await) work.
+
 describe('Client#listFiles', function () {
-    function verifyResponse(response) {
-        response.should.be.an.Object();
-
-        response.should.have.key('_code');
-        response._code.should.be.exactly('Ok');
-
-        response.should.have.key('files');
-        response.files.should.be.an.Array();
-        response.files.should.not.be.empty();
-
-    }
-
     it('should work with async/await', async function () {
         const dyn = new Client(env.apiToken);
 
@@ -43,4 +33,15 @@ describe('Client#listFiles', function () {
             end();
         });
     });
+
+    function verifyResponse(response) {
+        response.should.be.an.Object();
+
+        response.should.have.key('_code');
+        response._code.should.be.exactly('Ok');
+
+        response.should.have.key('files');
+        response.files.should.be.an.Array();
+        response.files.should.not.be.empty();
+    }
 });

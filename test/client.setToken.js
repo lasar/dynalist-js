@@ -2,9 +2,7 @@ const should = require('should');
 
 const Client = require('../');
 
-// const env = require('./env');
-
-describe('setToken', function () {
+describe('Client#setToken', function () {
     it('should store the passed API token', function() {
         const testToken = 'testToken';
 
