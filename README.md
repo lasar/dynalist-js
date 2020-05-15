@@ -144,13 +144,7 @@ dyn.sendToInbox('Call Fox', function(err, data) {
     
 ### upload - Upload file (Pro only)
 
-```js
-dyn.upload(filename, content_type, data, function(err, data) {
-    // …
-});
-```
-
-This API endpoint is only available for Pro accounts.
+This API method is not yet implemented.
 
 ## Utilities
 
