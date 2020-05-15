@@ -71,7 +71,7 @@ Client.prototype.sendToInbox = function (content, data, callback) {
 Client.prototype.makeRequest = function (endpoint, data, callback) {
     const self = this;
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
         data.token = self.token;
 
         const options = {
@@ -85,29 +85,14 @@ Client.prototype.makeRequest = function (endpoint, data, callback) {
 
         request(options, function (err, res, response) {
             if (err) {
-                // Error in HTTP request - return object that is formatted like a Client error
-                const errorData = {
+                // Error in HTTP request - overwrite response with object that is formatted like a Client error
+                response = {
                     _code: err,
                     _msg: err,
                 };
-
-                if(typeof callback === 'function') {
-                    callback(errorData);
-                }
-
-                reject(errorData);
-
-                return;
             }
 
-            // Return response as error
-            if (response._code !== 'Ok') {
-                if(typeof callback === 'function') {
-                    callback(response);
-                }
-
-                reject(response);
-            }
+            response._success = response._code === 'Ok';
 
             // Success
             if(typeof callback === 'function') {
