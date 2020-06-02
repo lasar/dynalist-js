@@ -1,6 +1,6 @@
 {
   "name": "dynalist-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node.JS Client for dynalist.io",
   "main": "src/client.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "nodejs"
   ],
   "author": "Lasar Liepins",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lasar/dynalist-js/issues"
   },
