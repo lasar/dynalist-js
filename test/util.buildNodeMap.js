@@ -6,12 +6,14 @@ const Client = require('../');
 const env = require('./env');
 
 describe('Util#buildNodeMap', function () {
-    it('should convert to a map', async function () {
-        const dyn = new Client(env.apiToken);
+    let edit1, edit2, edit3;
 
+    before(async function () {
         // Create a simple tree of nodes
 
-        const edit1 = await dyn.editDocument(env.fileId, [
+        const dyn = new Client(env.apiToken);
+
+        edit1 = await dyn.editDocument(env.fileId, [
             {
                 action: 'insert',
                 parent_id: 'root',
@@ -19,7 +21,7 @@ describe('Util#buildNodeMap', function () {
             },
         ]);
 
-        const edit2 = await dyn.editDocument(env.fileId, [
+        edit2 = await dyn.editDocument(env.fileId, [
             {
                 action: 'insert',
                 parent_id: edit1.new_node_ids[0],
@@ -37,7 +39,7 @@ describe('Util#buildNodeMap', function () {
             },
         ]);
 
-        const edit3 = await dyn.editDocument(env.fileId, [
+        edit3 = await dyn.editDocument(env.fileId, [
             {
                 action: 'insert',
                 parent_id: edit2.new_node_ids[0],
@@ -64,6 +66,25 @@ describe('Util#buildNodeMap', function () {
                 content: 'buildNodeMap C.1',
             }
         ]);
+    });
+
+    after(async function () {
+        // Remove tree again
+
+        const dyn = new Client(env.apiToken);
+
+        const del = await dyn.editDocument(env.fileId, [
+            {
+                action: 'delete',
+                node_id: edit1.new_node_ids[0],
+            }
+        ]);
+
+        env.verifySuccess(del);
+    });
+
+    it('should convert to a map', async function () {
+        const dyn = new Client(env.apiToken);
 
         // Fetch document
 
@@ -88,16 +109,17 @@ describe('Util#buildNodeMap', function () {
         if(env.sleepForHuman) {
             await sleep(500);
         }
+    });
 
-        // Remove tree again
+    it('should not modify the original', async function () {
+        const dyn = new Client(env.apiToken);
 
-        const del = await dyn.editDocument(env.fileId, [
-            {
-                action: 'delete',
-                node_id: edit1.new_node_ids[0],
-            }
-        ]);
+        const document1 = await dyn.readDocument(env.fileId);
+        const document2 = await dyn.readDocument(env.fileId);
 
-        env.verifySuccess(del);
+        dyn.util.buildNodeTree(document1.nodes);
+
+        document1.nodes.should.deepEqual(document2.nodes);
+
     });
 });
