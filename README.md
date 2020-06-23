@@ -206,7 +206,7 @@ dyn.readDocument(documentId, function(err, doc) {
 Rudimentary tests exist but could be extended by a lot. They are written with `mocha` and `should`.
 
 The tests require a working API token and the ID of a file that can be used by the tests. The file will be modified, therefore it should not contain actually important information.
-Also note that frequest test runs may run into the API's rate limiting.
+Also note that frequent test runs may run into the API's rate limiting.
 
 There is no option to run tests only offline yet. **Tests WILL modify data in your account.**
 
