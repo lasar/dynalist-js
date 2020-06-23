@@ -20,7 +20,7 @@ Utilities.prototype.buildNodeMap = function (nodes) {
     Object.keys(nodes).forEach(function (key) {
         const node = nodes[key];
 
-        nodeMap[node.id] = node;
+        nodeMap[node.id] = JSON.parse(JSON.stringify(node));
     });
 
     Object.keys(nodes).forEach(function (key) {
