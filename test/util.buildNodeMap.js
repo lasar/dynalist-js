@@ -6,6 +6,8 @@ const Client = require('../');
 const env = require('./env');
 
 describe('Util#buildNodeMap', function () {
+    this.timeout(10000);
+
     let edit1, edit2, edit3;
 
     before(async function () {
