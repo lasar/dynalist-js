@@ -28,9 +28,15 @@ Utilities.prototype.buildNodeMap = function (nodes) {
 
         let k;
 
-        for (k in node.children) {
-            nodeMap[node.children[k]].parent = node.id;
+        if(!node.children) {
+            return;
         }
+
+        node.children.forEach(function (childNodeId) {
+            if (nodeMap[childNodeId]) {
+                nodeMap[childNodeId].parent = node.id;
+            }
+        });
     });
 
     return nodeMap;
