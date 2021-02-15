@@ -218,5 +218,5 @@ npm install
 API_TOKEN=my_api_token FILE_ID=my_test_file npm test
 
 # If you want to pass options to mocha you need to call mocha directly: 
-API_TOKEN=my_api_token FILE_ID=my_test_file ./node_modules/bin/mocha --grep "Client#listFiles" 
+API_TOKEN=my_api_token FILE_ID=my_test_file ./node_modules/.bin/mocha --grep "Client#listFiles" 
 ```
