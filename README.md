@@ -1,4 +1,4 @@
-# client.js - a Node.JS Client for dynalist.io
+# dynalist-js - a Node.JS Client for dynalist.io
 
 ![CI](https://github.com/lasar/dynalist-js/workflows/Node.js%20CI/badge.svg) ![Package Build](https://github.com/lasar/dynalist-js/workflows/Node.js%20Package/badge.svg)
 
